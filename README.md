@@ -45,19 +45,30 @@ import './../styles/styles.css!';
 This goes for the same for importing templates for your Angular directives
 
 ```
-import template from './../templates/tw-business-card.html!text';
+import template from './../templates/my-module-directive.html!text';
 
 export default function myModuleDirective()
 {
     return {
         restrict: 'E',
-        scope: {}},
+        scope: {},
         template: template,
         link: function (scope, elem, attrs, ctrl) {
             // ...
         }
     };
 }
+```
+
+And finally define your module in `src/module.js`:
+
+```
+import 'angular'
+import myModuleDirective from './directives/myModuleDirective'
+
+// Define your module and register any Angular components with it
+angular.module('myModule', [])
+    .directive('myModuleDirective', myModuleDirective);
 ```
 
 SystemJS (ala `jspm`) will take care of the rest
